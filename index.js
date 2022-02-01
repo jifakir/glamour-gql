@@ -1,5 +1,8 @@
 const { ApolloServer} = require('apollo-server-express');
-const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
+const { 
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageGraphQLPlayground 
+} = require('apollo-server-core');
 const express = require('express');
 const http = require('http');
 const { db } = require("./db");
@@ -22,7 +25,10 @@ async function startApolloServer(typeDefs, resolvers) {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageGraphQLPlayground()
+    ],
   });
 
   // More required logic for integrating with Express
@@ -37,8 +43,8 @@ async function startApolloServer(typeDefs, resolvers) {
   });
 
   // Modified server startup
-  await new Promise(resolve => httpServer.listen({ port: process.env.PORT || 4000 }, resolve));
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+  await new Promise(resolve => httpServer.listen({ port: process.env.PORT || 5000 }, resolve));
+  console.log(`🚀 Server ready at ${process.env.NODE_ENV === 'production' ? 'https://glamour-gql.herokuapp.com/' : 'localhost:5000'}${server.graphqlPath}`);
 }
 
 startApolloServer(typeDefs, resolvers);
