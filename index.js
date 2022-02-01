@@ -44,7 +44,7 @@ async function startApolloServer(typeDefs, resolvers) {
 
   // Modified server startup
   await new Promise(resolve => httpServer.listen({ port: process.env.PORT || 5000 }, resolve));
-  console.log(`🚀 Server ready at ${process.env.NODE_ENV === 'production' ? 'https://glamour-gql.herokuapp.com/' : 'localhost:5000'}${server.graphqlPath}`);
+  console.log(`🚀 Server ready at ${process.env.NODE_ENV === 'production' ? 'https://glamour-gql.herokuapp.com' : 'localhost:5000'}${server.graphqlPath}`);
 }
 
 startApolloServer(typeDefs, resolvers);
