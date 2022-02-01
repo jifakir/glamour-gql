@@ -33,7 +33,7 @@ async function startApolloServer(typeDefs, resolvers) {
 
 
   // More required logic for integrating with Express
-  await server.start({cors: { credentials: true, origin: [process.env.FRONTEND_URL, process.env.BACKED_URL, process.env.PLAYGROUND_URL] }});
+  await server.start({cors: { credentials: true, origin: "*" }});
 
   server.applyMiddleware({
     app,
