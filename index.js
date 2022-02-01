@@ -29,6 +29,7 @@ async function startApolloServer(typeDefs, resolvers) {
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageGraphQLPlayground()
     ],
+    introspection:true
   });
 
 
